@@ -36,7 +36,7 @@
     if (s.model) $("model").value = s.model;
     $("instructions").value = s.instructions || "";
     $("signature").value = s.signature || "";
-    $("autoDraft").checked = s.autoDraft !== false;
+    $("autoDraft").checked = s.autoDraft === true; // off unless the user turns it on
     if (s.tone) $("tone").value = s.tone;
     if (s.length) $("length").value = s.length;
   }
@@ -103,7 +103,7 @@
       escapeHtml(currentEmail.fromName || currentEmail.fromEmail);
 
     const s = loadSettings();
-    if (s.autoDraft !== false && s.apiKey) generate();
+    if (s.autoDraft === true && s.apiKey) generate();
   }
 
   // ---------- calling Claude ----------
