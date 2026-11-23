@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Reply Drafter</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="taskpane.css" />
+</head>
+<body>
+  <header>
+    <h1>AI Reply Drafter</h1>
+    <button id="settingsToggle" class="link" title="Settings">⚙ Settings</button>
+  </header>
+
+  <section id="settings" class="card hidden">
+    <label>Anthropic API key
+      <input id="apiKey" type="password" placeholder="sk-ant-..." autocomplete="off" />
+    </label>
+    <label>Model
+      <select id="model">
+        <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (balanced)</option>
+        <option value="claude-haiku-5-5">Claude Haiku 5.5 (fastest, cheapest)</option>
+        <option value="claude-opus-5-5">Claude Opus 5.5 (best quality)</option>
+      </select>
+    </label>
+    <label>About me / how I write <span class="hint">(role, voice, things to always or never say)</span>
+      <textarea id="instructions" rows="4" placeholder="e.g. I'm an account manager at an insurance agency. Warm but brief. Never promise coverage; say I'll confirm with the carrier."></textarea>
+    </label>
+    <label>Sign-off
+      <textarea id="signature" rows="3" placeholder="Best,&#10;Jane"></textarea>
+    </label>
+    <label class="row"><input id="autoDraft" type="checkbox" checked /> Draft automatically when I open an email</label>
+    <button id="saveSettings" class="primary">Save settings</button>
+    <p class="hint">Your key is stored only in this browser/Outlook on this computer.</p>
+  </section>
+
+  <section class="card">
+    <div id="emailMeta" class="meta">Open an email to get started.</div>
+    <div class="controls">
+      <label>Tone
+        <select id="tone">
+          <option value="professional and friendly">Professional</option>
+          <option value="warm and casual">Casual</option>
+          <option value="formal">Formal</option>
+          <option value="direct and concise">Direct</option>
+        </select>
+      </label>
+      <label>Length
+        <select id="length">
+          <option value="short (2-4 sentences)">Short</option>
+          <option value="medium (1-2 paragraphs)">Medium</option>
+          <option value="detailed">Detailed</option>
+        </select>
+      </label>
+    </div>
+    <label>Extra guidance for this reply <span class="hint">(optional)</span>
+      <input id="guidance" type="text" placeholder="e.g. Accept the meeting, suggest Thursday instead" />
+    </label>
+    <button id="generate" class="primary">✨ Draft reply</button>
+  </section>
+
+  <section class="card">
+    <div id="status" class="status"></div>
+    <textarea id="draft" rows="14" placeholder="Your draft will appear here. You can edit it before inserting."></textarea>
+    <div class="actions">
+      <button id="reply" class="primary" disabled>Reply</button>
+      <button id="replyAll" disabled>Reply all</button>
+      <button id="copy" disabled>Copy</button>
+    </div>
+    <p class="hint">Nothing is ever sent automatically — the draft opens in Outlook's reply window for you to review.</p>
+  </section>
+
+  <script src="taskpane.js"></script>
+</body>
+</html>
